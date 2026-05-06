@@ -44,12 +44,12 @@ This project demonstrates **Object-Oriented Programming concepts**, **REST API c
  
   #### Path for each class in the repository :
 
-  src/main/java/com/example/demo/controller : - NoticeController.java
-  src/main/java/com/example/demo/model : - Admin.java
+  - src/main/java/com/example/demo/controller : - NoticeController.java
+  - src/main/java/com/example/demo/model : - Admin.java
                                          - User.java
                                          - Category.java
                                          - Notice.java
-  src/main/java/com/example/demo/service : - NoticeBoard.java
+  - src/main/java/com/example/demo/service : - NoticeBoard.java
                                            - FileManager.java
 
 ### Frontend:
