@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Notice Dashboard</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #020617, #0f172a);
+    color: #e2e8f0;
+}
+
+/* LOGIN */
+#loginPage {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    background: rgba(255,255,255,0.05);
+    padding: 35px;
+    border-radius: 15px;
+    width: 320px;
+    text-align: center;
+}
+
+.login-box h2 {
+    margin-bottom: 5px;
+}
+
+.login-box p {
+    margin-bottom: 15px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+/* INPUT */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255,255,255,0.05);
+    color: white;
+}
+
+/* BUTTON */
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #38bdf8, #6366f1);
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* DASHBOARD */
+#app {
+    display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background: #020617;
+    padding: 20px;
+    border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.sidebar h3 {
+    color: #38bdf8;
+}
+
+.sidebar p {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.sidebar p:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.logout {
+    background: linear-gradient(45deg, #ef4444, #dc2626);
+}
+
+/* CONTAINER */
+.container {
+    padding: 20px 30px;
+}
+
+/* CARDS */
+.card {
+    background: rgba(255,255,255,0.03);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* NOTICE */
+.notice {
+    background: rgba(255,255,255,0.02);
+    padding: 15px;
+    margin: 12px 0;
+    border-left: 4px solid #38bdf8;
+    border-radius: 10px;
+}
+
+.notice b {
+    color: #38bdf8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div id="loginPage">
+    <div class="login-box">
+
+
+    <h2><i class="fa-solid fa-bell"></i> Notice Hub</h2>
+    <p>Centralized platform for managing and viewing important notices</p>
+
+    <input id="username" placeholder="Username">
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    
+
+</div>
+
+
+</div>
+
+<!-- APP -->
+
+<div id="app" style="display:none;">
+
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+    <h3><i class="fa-solid fa-layer-group"></i> Dashboard</h3>
+
+    <p id="roleText">Role</p>
+
+    <hr style="border:0.5px solid rgba(255,255,255,0.1); margin:15px 0;">
+
+    <p><i class="fa-solid fa-bullhorn"></i> Notices</p>
+    <p><i class="fa-solid fa-tags"></i> Categories</p>
+    <p><i class="fa-solid fa-user"></i> Users</p>
+
+    <hr style="border:0.5px solid rgba(255,255,255,0.1); margin:15px 0;">
+
+    <p style="font-size:12px; color:#64748b;">
+        System Status: <span style="color:#22c55e;">Active</span>
+    </p>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <div class="header">
+        <h2><i class="fa-solid fa-bullhorn"></i> Notice Board</h2>
+        <button class="logout" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="container">
+
+        <!-- STATS -->
+        <div style="display:flex; gap:20px;">
+            <div class="card" style="flex:1;">
+                <h3>Total Notices</h3>
+                <h2 id="totalCount">0</h2>
+            </div>
+            <div class="card" style="flex:1;">
+                <h3>Categories</h3>
+                <h2 id="categoryCount">0</h2>
+            </div>
+        </div>
+
+        <!-- ADMIN -->
+        <div id="adminPanel" style="display:none;">
+
+            <div class="card">
+                <h3>Add Notice</h3>
+                <input id="nid" placeholder="ID">
+                <input id="title" placeholder="Title">
+                <input id="date" placeholder="Date">
+                <input id="categoryInput" placeholder="Category">
+                <textarea id="content" placeholder="Content"></textarea>
+                <button onclick="addNotice()">Add</button>
+            </div>
+
+            <div class="card">
+                <h3>All Notices</h3>
+                <div id="adminNotices"></div>
+            </div>
+
+        </div>
+
+        <!-- USER -->
+        <div id="userPanel" style="display:none;">
+
+            <div class="card">
+                <h3>Search</h3>
+                <input id="searchBox" placeholder="Search title">
+                <button onclick="searchNotice()">Search</button>
+            </div>
+
+            <div class="card">
+                <h3>Categories</h3>
+                <div id="userCategories"></div>
+            </div>
+
+            <div class="card">
+                <h3>Notices</h3>
+                <div id="userNotices"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<script>
+
+const BASE_URL = "http://localhost:8080";
+let allNotices = [];
+
+// LOGIN
+async function login() {
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    const res = await fetch(BASE_URL + "/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ username, password })
+    });
+
+    const data = await res.json();
+
+    if (data.role === "admin") {
+        document.getElementById("roleText").innerText = "Admin";
+        start(true);
+    }
+    else if (data.role === "user") {
+        document.getElementById("roleText").innerText = "User";
+        start(false);
+    }
+    else alert("Invalid");
+}
+
+function start(isAdmin) {
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("app").style.display = "flex";
+
+    if (isAdmin)
+        document.getElementById("adminPanel").style.display = "block";
+    else
+        document.getElementById("userPanel").style.display = "block";
+
+    loadNotices();
+}
+
+function logout() { location.reload(); }
+
+// ADD
+async function addNotice() {
+    await fetch(BASE_URL + "/addNotice", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            id: document.getElementById("nid").value,
+            title: document.getElementById("title").value,
+            date: document.getElementById("date").value,
+            category: document.getElementById("categoryInput").value,
+            content: document.getElementById("content").value
+        })
+    });
+    loadNotices();
+}
+
+// LOAD
+async function loadNotices() {
+    const res = await fetch(BASE_URL + "/getNotices");
+    allNotices = await res.json();
+
+    document.getElementById("totalCount").innerText = allNotices.length;
+    let categories = [...new Set(allNotices.map(n => n.category))];
+    document.getElementById("categoryCount").innerText = categories.length;
+
+    renderAdmin(allNotices);
+    renderUser(allNotices);
+}
+
+// ADMIN VIEW
+function renderAdmin(data) {
+    let html = "";
+    data.forEach(n => {
+        html += `
+        <div class="notice">
+            <b>${n.noticeID} - ${n.title}</b><br>
+            ${n.content}<br>
+            <input id="edit_${n.noticeID}" placeholder="Edit content">
+            <button onclick="updateNotice(${n.noticeID})">Update</button>
+            <button onclick="deleteNotice(${n.noticeID})">Delete</button>
+        </div>`;
+    });
+    document.getElementById("adminNotices").innerHTML = html;
+}
+
+// USER VIEW
+function renderUser(data) {
+    let categories = [...new Set(data.map(n => n.category))];
+
+    let catHtml = `<button onclick="filterCategory('ALL')">ALL</button>`;
+    categories.forEach(c => {
+        catHtml += `<button onclick="filterCategory('${c}')">${c}</button>`;
+    });
+
+    let noticeHtml = "";
+    data.forEach(n => {
+        noticeHtml += `<div class="notice"><b>${n.title}</b><br>${n.content}</div>`;
+    });
+
+    document.getElementById("userCategories").innerHTML = catHtml;
+    document.getElementById("userNotices").innerHTML = noticeHtml;
+}
+
+// FILTER
+function filterCategory(cat) {
+    let filtered = allNotices;
+    if (cat !== "ALL") filtered = allNotices.filter(n => n.category === cat);
+    renderUser(filtered);
+}
+
+// DELETE
+async function deleteNotice(id) {
+    await fetch(BASE_URL + "/deleteNotice/" + id, { method: "DELETE" });
+    loadNotices();
+}
+
+// UPDATE
+async function updateNotice(id) {
+    let content = document.getElementById("edit_" + id).value;
+    await fetch(BASE_URL + "/updateNotice/" + id, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ content })
+    });
+    loadNotices();
+}
+
+// SEARCH
+async function searchNotice() {
+    let title = document.getElementById("searchBox").value;
+    const res = await fetch(BASE_URL + "/search?title=" + title);
+    const data = await res.json();
+    renderUser(data);
+}
+
+</script>
+
+</body>
+</html>
