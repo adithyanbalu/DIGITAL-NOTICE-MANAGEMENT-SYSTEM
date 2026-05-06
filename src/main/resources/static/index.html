@@ -14,7 +14,6 @@ body {
     color: #e2e8f0;
 }
 
-/* LOGIN */
 #loginPage {
     height: 100vh;
     display: flex;
@@ -40,7 +39,6 @@ body {
     font-size: 14px;
 }
 
-/* INPUT */
 input, textarea {
     width: 100%;
     padding: 10px;
@@ -51,7 +49,6 @@ input, textarea {
     color: white;
 }
 
-/* BUTTON */
 button {
     padding: 10px;
     border: none;
@@ -65,12 +62,10 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* DASHBOARD */
 #app {
     display: flex;
 }
 
-/* SIDEBAR */
 .sidebar {
     width: 220px;
     background: #020617;
@@ -92,12 +87,10 @@ button:hover {
     background: rgba(255,255,255,0.05);
 }
 
-/* MAIN */
 .main {
     flex: 1;
 }
 
-/* HEADER */
 .header {
     display: flex;
     justify-content: space-between;
@@ -109,12 +102,10 @@ button:hover {
     background: linear-gradient(45deg, #ef4444, #dc2626);
 }
 
-/* CONTAINER */
 .container {
     padding: 20px 30px;
 }
 
-/* CARDS */
 .card {
     background: rgba(255,255,255,0.03);
     border-radius: 14px;
@@ -127,7 +118,6 @@ button:hover {
     transform: translateY(-5px);
 }
 
-/* NOTICE */
 .notice {
     background: rgba(255,255,255,0.02);
     padding: 15px;
@@ -145,8 +135,6 @@ button:hover {
 </head>
 
 <body>
-
-<!-- LOGIN -->
 
 <div id="loginPage">
     <div class="login-box">
@@ -167,12 +155,8 @@ button:hover {
 
 </div>
 
-<!-- APP -->
-
 <div id="app" style="display:none;">
 
-
-<!-- SIDEBAR -->
 <div class="sidebar">
 
     <h3><i class="fa-solid fa-layer-group"></i> Dashboard</h3>
@@ -193,7 +177,6 @@ button:hover {
 
 </div>
 
-<!-- MAIN -->
 <div class="main">
 
     <div class="header">
@@ -203,7 +186,6 @@ button:hover {
 
     <div class="container">
 
-        <!-- STATS -->
         <div style="display:flex; gap:20px;">
             <div class="card" style="flex:1;">
                 <h3>Total Notices</h3>
@@ -215,7 +197,6 @@ button:hover {
             </div>
         </div>
 
-        <!-- ADMIN -->
         <div id="adminPanel" style="display:none;">
 
             <div class="card">
@@ -235,7 +216,6 @@ button:hover {
 
         </div>
 
-        <!-- USER -->
         <div id="userPanel" style="display:none;">
 
             <div class="card">
@@ -268,7 +248,6 @@ button:hover {
 const BASE_URL = "http://localhost:8080";
 let allNotices = [];
 
-// LOGIN
 async function login() {
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
@@ -306,7 +285,6 @@ function start(isAdmin) {
 
 function logout() { location.reload(); }
 
-// ADD
 async function addNotice() {
     await fetch(BASE_URL + "/addNotice", {
         method: "POST",
@@ -322,7 +300,6 @@ async function addNotice() {
     loadNotices();
 }
 
-// LOAD
 async function loadNotices() {
     const res = await fetch(BASE_URL + "/getNotices");
     allNotices = await res.json();
@@ -334,8 +311,6 @@ async function loadNotices() {
     renderAdmin(allNotices);
     renderUser(allNotices);
 }
-
-// ADMIN VIEW
 function renderAdmin(data) {
     let html = "";
     data.forEach(n => {
@@ -351,8 +326,8 @@ function renderAdmin(data) {
     document.getElementById("adminNotices").innerHTML = html;
 }
 
-// USER VIEW
-function renderUser(data) {
+function 
+    renderUser(data) {
     let categories = [...new Set(data.map(n => n.category))];
 
     let catHtml = `<button onclick="filterCategory('ALL')">ALL</button>`;
@@ -369,20 +344,17 @@ function renderUser(data) {
     document.getElementById("userNotices").innerHTML = noticeHtml;
 }
 
-// FILTER
 function filterCategory(cat) {
     let filtered = allNotices;
     if (cat !== "ALL") filtered = allNotices.filter(n => n.category === cat);
     renderUser(filtered);
 }
 
-// DELETE
 async function deleteNotice(id) {
     await fetch(BASE_URL + "/deleteNotice/" + id, { method: "DELETE" });
     loadNotices();
 }
 
-// UPDATE
 async function updateNotice(id) {
     let content = document.getElementById("edit_" + id).value;
     await fetch(BASE_URL + "/updateNotice/" + id, {
@@ -393,7 +365,6 @@ async function updateNotice(id) {
     loadNotices();
 }
 
-// SEARCH
 async function searchNotice() {
     let title = document.getElementById("searchBox").value;
     const res = await fetch(BASE_URL + "/search?title=" + title);
