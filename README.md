@@ -31,7 +31,7 @@ This project demonstrates **Object-Oriented Programming concepts**, **REST API c
 - Exception Handling
 
 
-  #### 🧩 Class Description
+  ####  Class Description
 
 - **User** → Basic user with login and view notice feature  
 - **Admin** → Extends User, can add, update, and delete notices  
@@ -39,18 +39,18 @@ This project demonstrates **Object-Oriented Programming concepts**, **REST API c
 - **NoticeBoard** → Manages all notices using ArrayList  
 - **Category** → Represents notice category   
 - **FileManager** → Handles saving notice data into file
-- 
+ 
 - **NoticeController** → Handles API requests and connects frontend with backend  
  
   #### Path for each class in the repository :
 
-  src/main/java/com/example/demo/controller : NoticeController.java
-  src/main/java/com/example/demo/model : Admin.java
-                                         User.java
-                                         Category.java
-                                         Notice.java
-  src/main/java/com/example/demo/service : NoticeBoard.java
-                                           FileManager.java
+  src/main/java/com/example/demo/controller : - NoticeController.java
+  src/main/java/com/example/demo/model : - Admin.java
+                                         - User.java
+                                         - Category.java
+                                         - Notice.java
+  src/main/java/com/example/demo/service : - NoticeBoard.java
+                                           - FileManager.java
 
 ### Frontend:
 - HTML5
@@ -106,7 +106,7 @@ In the File Manager Class , actual path is there . For Reference, the file notic
 This project is developed for academic evaluation and demonstrates backend logic, frontend integration, and OOP principles.
 
 This Digital Notice Management System is developed and successfully completed by **Group 12, CSE-A** as part of the academic curriculum.
-**ADITHYAN B**
-**ROBIN ANTONY**
-**MADHAV A**
-**ALI ADNAN THAHA**
+- **ADITHYAN B**
+- **ROBIN ANTONY**
+- **MADHAV A**
+- **ALI ADNAN THAHA**
