@@ -30,24 +30,35 @@ This project demonstrates **Object-Oriented Programming concepts**, **REST API c
 - File Handling (FileWriter)
 - Exception Handling
 
-  #### Classes we included:
-  - User : Represents a general user of the system. It contains basic attributes like userID, name, and password. It provides login functionality and allows users to view notices through the NoticeBoard.
-  - Admin : Admin is a specialized type of User (inheritance). It has additional privileges such as adding, updating, and deleting notices. Admin interacts with NoticeBoard and Notice objects to manage system data.
-  - Notice : Represents a notice entity in the system. It contains details like noticeID, title, date, content, and category. It supports updating content and displaying notice details.
-  - NoticeBoard : Acts as the core service layer that manages all notices using an ArrayList. It provides functionalities like adding notices, removing notices, searching notices by title, and displaying all notices.
-  - Category : Represents the category of a notice. Each notice is associated with a category . It contains categoryID and categoryName.
-  - File Manager : Handles file operations for persistent storage. It saves notice data into a text file using FileWriter and simulates deletion of notices from storage.
- 
-  - NoticeController Class :Acts as the REST controller that connects frontend and backend. It handles HTTP requests such as login, add notice, delete notice, update notice, and search notice, and communicates with service classes.
 
+  #### 🧩 Class Description
+
+- **User** → Basic user with login and view notice feature  
+- **Admin** → Extends User, can add, update, and delete notices  
+- **Notice** → Stores notice details like title, content, date, category  
+- **NoticeBoard** → Manages all notices using ArrayList  
+- **Category** → Represents notice category   
+- **FileManager** → Handles saving notice data into file
+- 
+- **NoticeController** → Handles API requests and connects frontend with backend  
+ 
   #### Path for each class in the repository :
 
-  src/
+  src/main/java/com/example/demo/controller : NoticeController.java
+  src/main/java/com/example/demo/model : Admin.java
+                                         User.java
+                                         Category.java
+                                         Notice.java
+  src/main/java/com/example/demo/service : NoticeBoard.java
+                                           FileManager.java
 
 ### Frontend:
 - HTML5
 - CSS3 (Dark Theme UI)
 - JavaScript (Fetch API)
+
+  #### Path for UI code in the repository :
+  src/main/resources/static : index.html
 
 
 ## 🔗 API Endpoints
@@ -93,3 +104,9 @@ In the File Manager Class , actual path is there . For Reference, the file notic
 
 ##  Note
 This project is developed for academic evaluation and demonstrates backend logic, frontend integration, and OOP principles.
+
+This Digital Notice Management System is developed and successfully completed by **Group 12, CSE-A** as part of the academic curriculum.
+**ADITHYAN B**
+**ROBIN ANTONY**
+**MADHAV A**
+**ALI ADNAN THAHA**
